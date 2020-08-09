@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'fontawesome_5',
     'material',
-    # 'tinymce',
+    'tinymce',
     'django_registration',
     'django.contrib.admin',
     'django.contrib.auth',

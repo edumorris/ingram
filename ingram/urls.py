@@ -22,5 +22,7 @@ from django.contrib.auth import views, logout as auth_logout, login as auth_logi
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('insta.urls')),
-    url(r'accounts/', include('registration.backends.simple.urls'))
+    url(r'^accounts/', include('django_registration.backends.one_step.urls')),
+    url(r'^accounts/login/$', v.login, {"next_page": '/'}),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
 ]

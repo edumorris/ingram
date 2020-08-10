@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {{block.super}}
+    <div class="container">
+        <p>{{current_user.id}}</p>
+        <p>{{current_user.username}}</p>
+        <p>{{current_user.email}}</p>
+    </div>
+{% endblock %}

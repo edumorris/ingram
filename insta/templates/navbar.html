@@ -33,7 +33,9 @@
                                     width="40" height="40" class="rounded-circle">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Dashboard</a>
+                                <p class="dropdown-item text-center"><mark>{{ current_user }}</mark></p>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'profile' current_user.id %}">Dashboard</a>
                                 <a class="dropdown-item" href="#">Edit Profile</a>
                                 <a class="dropdown-item" href="#">Change Password</a>
                                 <a class="dropdown-item" href="{% url 'logout'%}?next={{request.path}}">Log Out</a>

@@ -2,7 +2,8 @@ from django.db import models
 
 # Create your models here.
 class Profile(models.Model):
-    name = models.CharField(max_length = 100)
+    first_name = models.CharField(max_length = 30)
+    last_name = models.CharField(max_length = 30)
     email = models.EmailField()
     bio = models.TextField()
     phone_number = models.CharField(max_length =15, blank = True)
@@ -36,7 +37,7 @@ class Image(models.Model):
     image = models.ImageField(upload_to = 'pics/')
     img_name = models.CharField(max_length = 150)
     img_caption = models.CharField(max_length = 1000)
-    profile = models.ForeignKey(User , on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile , on_delete=models.CASCADE)
     category = models.ManyToManyField(Category, blank=True)
     pub_date = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField()

@@ -18,6 +18,8 @@ from django.urls import path,include
 from django.conf.urls import url
 from django_registration.backends.one_step.urls import views as v
 from django.contrib.auth import views, logout as auth_logout, login as auth_login
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,4 +27,5 @@ urlpatterns = [
     url(r'^accounts/', include('django_registration.backends.one_step.urls')),
     # url(r'^accounts/login/$', v.login, {"next_page": '/'}),
     url(r'^accounts/', include('django.contrib.auth.urls')),
+    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
 ]

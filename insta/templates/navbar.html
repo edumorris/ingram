@@ -1,12 +1,13 @@
 {% load bootstrap4 %}
 {% load fontawesome_5 %}
 {% load static %}
-
-{% block styles %}
-{% bootstrap_css %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
-{% endblock %}
+<head>
+    {% block styles %}
+        {% bootstrap_css %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    {% endblock %}
+</head>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">Ingram</a>

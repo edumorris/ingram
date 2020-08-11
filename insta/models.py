@@ -1,7 +1,14 @@
 from django.db import models
 
+# Signals
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from .models import *
+from django.contrib.auth.models import User
+
 # Create your models here.
 class Profile(models.Model):
+    user = models.OneToOneField(User, blank=True, default=0000, on_delete=models.CASCADE)
     first_name = models.CharField(max_length = 30)
     last_name = models.CharField(max_length = 30)
     email = models.EmailField()
@@ -10,7 +17,7 @@ class Profile(models.Model):
     prof_photo = models.ImageField(upload_to = 'pics/profiles/')
 
     def __str__(self):
-        return self.name
+        return self.first_name
     
     def save_profile(self):
         self.save()
@@ -20,6 +27,16 @@ class Profile(models.Model):
     
     def update_profile(self):
         pass
+    
+    
+    @receiver(post_save, sender=User)
+    def create_or_update_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+    
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
 
 class Category(models.Model):
     tag = models.CharField(max_length = 30)

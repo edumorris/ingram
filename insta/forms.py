@@ -8,4 +8,10 @@ class ProfileForm(forms.Form):
     phone_number = forms.IntegerField(label = "Phone Number:")
     profile_photo = forms.ImageField(label = "Profile Photo:")
 
+class ImageUploadForm(forms.Form):
+    image = forms.ImageField(label = "Image:")
+    image_name = forms.CharField(label = "Image Name:", max_length=50)
+    image_caption = forms.CharField(label = "Image Caption:", max_length=300)
+    category = forms.CharField(label = "Category:", max_length=100)
+
 

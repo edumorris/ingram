@@ -30,13 +30,14 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <!--Profile Image here-->
-                                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
+                                <img src="{{ MEDIA_URL }}/pics/profiles/{{ profile.prof_photo }}"
                                     width="40" height="40" class="rounded-circle">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <p class="dropdown-item text-center"><mark>{{ current_user }}</mark></p>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'profile' user.id %}">Dashboard</a>
+                                <a class="dropdown-item" href="{% url 'image_upload' user.id %}">Upload Image</a>
                                 <a class="dropdown-item" href="{% url 'profile_update' user.id %}">Edit Profile</a>
                                 <a class="dropdown-item" href="#">Change Password</a>
                                 <a class="dropdown-item" href="{% url 'logout'%}?next={{request.path}}">Log Out</a>

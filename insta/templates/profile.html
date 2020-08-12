@@ -1,10 +1,45 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/profile.css'%}">
+{% endblock %}
 
 {% block content %}
     {{block.super}}
     <div class="container">
-        <p>{{current_user.id}}</p>
-        <p>{{current_user.username}}</p>
-        <p>{{current_user.email}}</p>
+        <div class="profile-part">
+            <div class="profile-image">
+                <div class="the-profile-image">
+                    <img src="{{ MEDIA_URL }}/pics/profiles/{{ profile.prof_photo }}" alt="Profile Photo">
+                </div>
+                <div class="the-profile-name text-center">
+                    <i>{{ current_user.username }}</i>
+                </div>
+            </div>
+            <div class="profile-details">
+                <table>
+                    <tr>
+                        <td class="t-right"><i class="fas fa-user"></i></td>
+                        <td class="t-left">{{ profile.first_name }} {{ profile.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="t-right"><i class="fas fa-phone"></i></td>
+                        <td class="t-left">{{ profile.phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <td class="t-right"><i class="fas fa-envelope"></i></td>
+                        <td class="t-left">{{ current_user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td class="t-right"><i class="fas fa-address-card"></i></td>
+                        <td class="t-left t-bio">{{ profile.bio }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
+    <hr>
+    <div class="container-fluid"></div>
+    
 {% endblock %}

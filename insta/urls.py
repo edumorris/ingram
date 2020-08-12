@@ -8,7 +8,9 @@ urlpatterns = [
     url(r'^index/$', views.index_test, name='index'),
     url(r'^profile/(\d+)', views.profile, name='profile'),
     url(r'^profile_update/(\d+)', views.profile_update, name='profile_update'),
+    url(r'^image_upload/(\d+)', views.image_uploader, name='image_upload'),
 ]
 
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

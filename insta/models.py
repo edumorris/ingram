@@ -61,7 +61,7 @@ class Image(models.Model):
     comments = models.ManyToManyField(Comments, blank=True)
 
     def __str__(self):
-        return self.image
+        return self.img_name
     
     def save_image(self):
         self.save()

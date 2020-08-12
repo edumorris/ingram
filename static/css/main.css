@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+body, html {
+    font-family: 'EB Garamond', serif;
+}

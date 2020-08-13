@@ -20,6 +20,7 @@ from django_registration.backends.one_step.urls import views as v
 from django.contrib.auth import views, logout as auth_logout, login as auth_login
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
+from django.conf import settings
 from django.views.static import serve
 
 urlpatterns = [

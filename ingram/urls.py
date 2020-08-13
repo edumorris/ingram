@@ -20,6 +20,7 @@ from django_registration.backends.one_step.urls import views as v
 from django.contrib.auth import views, logout as auth_logout, login as auth_login
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
+from django.views.static import serve
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,4 +29,6 @@ urlpatterns = [
     # url(r'^accounts/login/$', v.login, {"next_page": '/'}),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]

@@ -30,10 +30,14 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <!--Profile Image here-->
-                                <img src="{{ MEDIA_URL }}/pics/profiles/{{ profile.prof_photo }}"
+                                {% if profile.prof_photo %}
+                                    <img src="{{ MEDIA_URL }}pics/profiles/{{ profile.prof_photo }}"
                                     width="40" height="40" class="rounded-circle">
+                                {% else %}
+                                    <img src="https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png" alt="Prof Avatar"  width="40" height="40" class="rounded-circle">
+                                {% endif %}
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <div class="dropdown-menu dropdown-toggle-split" aria-labelledby="navbarDropdownMenuLink">
                                 <p class="dropdown-item text-center"><mark>{{ current_user }}</mark></p>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'profile' user.id %}">Dashboard</a>
@@ -57,7 +61,7 @@
                 </ul>
             </div>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0 disabled">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
             <button class="btn bg-light my-2 my-sm-0" type="submit">Search</button>
         </form>

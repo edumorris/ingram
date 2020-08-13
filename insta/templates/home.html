@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
+    {% block styles %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    {% endblock %}
+
 {% block content %}
     {{block.super}}
     <div class="container">
@@ -12,8 +17,12 @@
                 <div class="card-body d-flex flex-row">
 
                     <!-- Avatar -->
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" class="rounded-circle mr-3" height="50px"
+                    {%  if img.profile.prof_photo %}
+                        <img src="{{ MEDIA_URL }}pics/profiles/{{ img.profile.prof_photo }}" class="rounded-circle mr-3" height="50px"
                         width="50px" alt="avatar">
+                    {% else %}
+                        <img src="https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png" alt="Prof Avatar"  width="40" height="40" class="rounded-circle">
+                    {% endif %}
 
                     <!-- Content -->
                     <div>
@@ -42,14 +51,20 @@
                     <div class="collapse-content">
 
                         <!-- Text -->
-                        <p class="card-text collapse" id="collapseContent">{{img.img_caption}}</p>
+                        <p class="card-text collapse" id="collapseContent"></p>
                         <!-- Button -->
                         <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" data-toggle="collapse"
                             href="#collapseContent" aria-expanded="false" aria-controls="collapseContent"></a>
                         <i class="fas fa-share-alt text-muted float-right p-1 my-1" data-toggle="tooltip" data-placement="top"
                             title="Share this post"></i>
-                        <i class="fas fa-heart text-muted float-right p-1 my-1 mr-3" data-toggle="tooltip" data-placement="top"
+                        <a href="{% url 'liking' img.id %}">
+                            <i class="fas fa-heart text-muted float-right p-1 my-1 mr-3" data-toggle="tooltip" data-placement="top"
                             title="I like it"></i>
+                        </a>
+                        <p class="ml-10">
+                            {{img.img_caption | truncatechars:50}}...
+                        </p>
+                        <i class="fas fa-thumbs-up"></i> {{ img.likes }}
 
                     </div>
 

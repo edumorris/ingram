@@ -9,7 +9,7 @@ from .email import send_welcome_email
 # Create your views here.
 @login_required(login_url='/accounts/login')
 def home(request):
-    latest_pics = Image.objects.all().order_by('-id')
+    latest_pics = Image.objects.order_by('-id').select_related('profile').all()
     current_user = request.user
     profile = Profile.objects.get(user = current_user.id)
 
@@ -44,11 +44,13 @@ def profile_update(request, user_id):
             mobile = form.cleaned_data['phone_number']
             dp = form.cleaned_data['profile_photo']
 
-            # profile = Profile(user = request.user, first_name = fname, last_name = lname, email = current_user.email, bio = about, phone_number = mobile, prof_photo = dp)
+            # Profile.objects.filter(pk=current_user.id).save(first_name = fname, last_name = lname, email = current_user.email, bio = about, phone_number = mobile, prof_photo = dp)
 
-            Profile.objects.filter(pk=current_user.id).update(first_name = fname, last_name = lname, email = current_user.email, bio = about, phone_number = mobile, prof_photo = dp)
+            # profile = Profile.objects.filter(pk=current_user.id).update(first_name = fname, last_name = lname, email = current_user.email, bio = about, phone_number = mobile, prof_photo = dp)
+            
+            Profile.objects.filter(user = request.user).update(first_name = fname, last_name = lname, email = current_user.email, bio = about, phone_number = mobile, prof_photo = dp)
 
-            return redirect(profile)
+            return redirect(home)
 
     else:
         form = ProfileForm()
@@ -76,11 +78,20 @@ def image_uploader(request, user_id):
 
             # image.category.add(tags)
 
-            return redirect(profile)
+            return redirect(home)
     else:
         form = ImageUploadForm()
     
     return render(request, 'image_upload.html', {"ImageUploadForm": form, "profile": profile})
+
+def likes(request, pic_id):
+    img = Image.objects.get(id = pic_id)
+    new_likes = img.likes + 1
+
+    # img.update(likes = new_likes)
+    Image.objects.filter(pk=pic_id).update(likes = new_likes)
+
+    return redirect(home)
 
 def index_test(request):
     title = "ingram index page testpage"

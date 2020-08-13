@@ -1,0 +1,9 @@
+.container {
+    padding: 50px;
+}
+
+.container form {
+    padding: 30px;
+    border: 1px solid #00000030;
+    border-radius: 25px;
+}
